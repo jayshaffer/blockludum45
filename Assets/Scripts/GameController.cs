@@ -34,12 +34,16 @@ public class GameController : MonoBehaviour
     public void ResetLevel(){
         Unpause();
         Scene scene = SceneManager.GetActiveScene(); 
+        if(scene.buildIndex == 0){
+            GameObject.Destroy(GameObject.FindGameObjectWithTag("Music"));
+        }
         SceneManager.LoadScene(scene.name);
     }
 
     public void NextLevel(){
         Scene scene = SceneManager.GetActiveScene(); 
         int index = scene.buildIndex + 1;
+        Debug.Log(SceneManager.sceneCount);
         if(SceneManager.sceneCountInBuildSettings > index){
             SceneManager.LoadScene(index);
         }
@@ -65,6 +69,9 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetButton("Switch")){
+            ResetLevel();
+        }
         if(Input.GetButtonDown("Jump") && titleScreen){
             NextLevel();
         }
