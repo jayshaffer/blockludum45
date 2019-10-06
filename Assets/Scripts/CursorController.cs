@@ -45,7 +45,7 @@ public class CursorController : MonoBehaviour
 
     void Update()
     {
-        if (dead || Time.time < canMoveAt)
+        if (gameController.paused || dead || Time.time < canMoveAt)
         {
             return;
         }

@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(frozen){
+        if(frozen || gameController.paused){
             return;
         }
         if (Input.GetButtonDown("Jump") && jumpTrigger.onGround)
@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(gameController.paused){
+            return;
+        }
         if(unfreezeAt != 0 && Time.time > unfreezeAt){
             Unfreeze();
         }

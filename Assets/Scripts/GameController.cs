@@ -9,8 +9,10 @@ public class GameController : MonoBehaviour
     public GameObject cursorControllerObject;
     public bool controllingPlayer = false;
     public bool titleScreen;
+    public bool paused = false;
     CursorController cursorController;
     PlayerController playerController;
+    
     void Start()
     {
         cursorController = cursorControllerObject.GetComponent<CursorController>(); 
@@ -25,6 +27,7 @@ public class GameController : MonoBehaviour
     }
 
     public void ResetLevel(){
+        Unpause();
         Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name);
     }
@@ -34,8 +37,23 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void Pause(){
+        paused = true;
+        Time.timeScale = 0.0f;
+    }
+
+    public void Unpause(){
+        paused = false;
+        Time.timeScale = 1.0f;
+    }
+
+    public void Quit(){
+        Application.Quit();
+    }
+
     void Update()
     {
+      
         if(Input.GetButton("Switch")){
             ResetLevel();
         }

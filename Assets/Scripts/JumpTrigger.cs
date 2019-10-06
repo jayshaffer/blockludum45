@@ -15,7 +15,6 @@ public class JumpTrigger : MonoBehaviour
     void Update()
     {
         onGround = colliding.Count != 0;
-        Debug.Log(colliding.Count);
     }
 
     void OnTriggerEnter2D(Collider2D other)
