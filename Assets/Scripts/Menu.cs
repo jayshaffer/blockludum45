@@ -33,7 +33,6 @@ public class Menu : MonoBehaviour
 
     public void Resume()
     {
-        Debug.Log("bleh");
         menuPanel.SetActive(false);
         gameController.Unpause();
     }

@@ -72,7 +72,6 @@ public class CursorController : MonoBehaviour
             time -= Time.deltaTime;
         }
         if(time <= 0){
-            Debug.Log("here");
             Kill();
         }
     }

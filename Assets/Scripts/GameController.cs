@@ -13,9 +13,14 @@ public class GameController : MonoBehaviour
     CursorController cursorController;
     PlayerController playerController;
     
+    void Awake(){
+    }
+
     void Start()
     {
-        cursorController = cursorControllerObject.GetComponent<CursorController>(); 
+        if(cursorControllerObject != null){
+            cursorController = cursorControllerObject.GetComponent<CursorController>(); 
+        }
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
@@ -34,7 +39,14 @@ public class GameController : MonoBehaviour
 
     public void NextLevel(){
         Scene scene = SceneManager.GetActiveScene(); 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        int index = scene.buildIndex + 1;
+        if(SceneManager.sceneCountInBuildSettings > index){
+            SceneManager.LoadScene(index);
+        }
+        else{
+            GameObject.Destroy(GameObject.FindGameObjectWithTag("Music"));
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void Pause(){
@@ -53,10 +65,6 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-      
-        if(Input.GetButton("Switch")){
-            ResetLevel();
-        }
         if(Input.GetButtonDown("Jump") && titleScreen){
             NextLevel();
         }

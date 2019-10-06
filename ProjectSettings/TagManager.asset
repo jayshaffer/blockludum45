@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlatformSpawner
   - Menu
+  - Music
   layers:
   - Default
   - TransparentFX
